@@ -118,7 +118,11 @@ int main() {
             bestCount = sienCount;
             bestAuthor = 2;
         }
-        cout<<bestAuthor<<endl;
+        //cout<<bestAuthor<<endl;
+        if(bestAuthor == 0)cout<<"Mickiewicz";
+        if(bestAuthor == 1)cout<<"Prus";
+        if(bestAuthor == 2)cout<<"Sienkiewicz";
+        cout<<endl;
     }
     return 0;
 }

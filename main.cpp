@@ -42,7 +42,7 @@ struct RollingHash{
     bool isInHashMap(string word){
         for (std::map<int, vector<string>>::iterator it = hashMap.begin(); it != hashMap.end(); it ++ ){
             if(it->second.size() <= word.size()){
-                
+
             }
         }
     }

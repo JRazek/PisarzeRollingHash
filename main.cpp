@@ -41,10 +41,29 @@ struct RollingHash{
     }
     bool isInHashMap(string word){
         for (std::map<int, vector<string>>::iterator it = hashMap.begin(); it != hashMap.end(); it ++ ){
-            if(it->second.size() <= word.size()){
-
+            for(int i = 0; i < it->second.size();i ++){
+                string pattern = it->second.at(i);
+                if(word.size() >= pattern.size()) {
+                    int hash = 0;
+                    for (int j = 0; j < pattern.size(); j++) {
+                        hash += word.at(j);
+                    }
+                    for (int j = 0; j < word.size() - pattern.size(); j++) {
+                        if (hash == it->first) {
+                            string tmpWord = "";
+                            for (int k = 0; k < pattern.size(); k++) {
+                                  tmpWord += word.at(j + k);
+                            }
+                            if (tmpWord == pattern) return true;
+                            //word validation
+                        }
+                        hash -= word.at(j);
+                        hash += word.at(j + pattern.size());
+                    }
+                }
             }
         }
+        return false;
     }
 };
 
@@ -77,14 +96,13 @@ int main() {
         getline(cin, line);
         vector<string> words = split(line, {',','.', '\"', '\'', ';', ':','!','?', ' '});
         words = castToSmall(words);
-        int mic = 0;
-        int sien = 0;
-        int prus = 0;
+        int micCount = 0;
+        int sienCount = 0;
+        int prusCount = 0;
         for(int i = 0; i < words.size(); i ++){
-            mic += micRollingHash->isInHashMap(words.at(i));
-           // cout<<words.at(i);
+            micCount += micRollingHash->isInHashMap(words.at(i));
         }
-        cout<<mic;
+        cout<<micCount;
     }
     return 0;
 }
